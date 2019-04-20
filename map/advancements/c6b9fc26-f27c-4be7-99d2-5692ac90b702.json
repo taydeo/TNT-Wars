@@ -1,0 +1,11 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:taiga": "2019-04-01 07:18:23 -0500",
+      "minecraft:snowy_tundra": "2019-04-01 07:17:53 -0500",
+      "minecraft:badlands": "2019-04-01 07:23:57 -0500",
+      "minecraft:savanna": "2019-04-01 07:23:56 -0500"
+    },
+    "done": false
+  }
+}
