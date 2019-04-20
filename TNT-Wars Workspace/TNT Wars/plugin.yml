@@ -1,0 +1,30 @@
+main: com.rast.tntwars.TNTWarsMain
+name: TNT_Wars
+version: 1.0.1
+description: This plugin is a TNT Wars game and tool to make your own TNT Wars maps.
+api-version: 1.13
+author: Raster556
+website: www.spigotmc.org //Remember to change later
+commands:
+    getselector:
+        description: Gives user the selector tool.
+        usage: "Usage: /<command>"
+        permission: tntwars.admin.edit
+        permission-message: You not have have permission to use this command.
+    playglobalsound:
+        description: Manualy plays game global sound.
+        usage: "Usage: /<command> [SoundName]"
+        permission: tntwars.admin.manualoveride
+        permission-message: You not have have permission to use this command.
+    endgame:
+        description: Manualy ends the game.
+        usage: "Usage: /<command>"
+        permission: tntwars.admin.manualoveride
+        permission-message: You not have have permission to use this command.
+permissions:
+  tntwars.admin.edit:
+   description: Allows use of the editor commands.
+   default: op
+  tntwars.admin.manualoveride:
+   description: Allows use of the manual overide commands.
+   default: op
