@@ -1,0 +1,5 @@
+package com.rast.tntwars.commands;
+
+public class SetRegion {
+
+}

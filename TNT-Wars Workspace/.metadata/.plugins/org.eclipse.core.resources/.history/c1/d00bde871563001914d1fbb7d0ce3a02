@@ -1,0 +1,16 @@
+package com.rast.tntwars.systems;
+
+/**
+ * This class is for the portals used as targets and stores a multitude of variables.
+ * 
+ * @author Raster556
+ */
+
+public class Portal {
+
+	public int portalNumb;
+	public int teamNumb;
+	public boolean destroyed = false;
+	public int[][] region;
+	
+}

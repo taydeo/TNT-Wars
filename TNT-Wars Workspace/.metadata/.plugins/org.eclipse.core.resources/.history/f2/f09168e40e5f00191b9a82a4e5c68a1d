@@ -1,0 +1,19 @@
+package com.rast.tntwars.systems;
+
+import org.bukkit.entity.Player;
+
+/**
+ * This class contains methods to start the game.
+ * 
+ * @author Raster556
+ */
+
+public class GameInitializer {
+
+	public static void addPlayerToGame (Player player) {
+		
+		
+		
+	}
+	
+}

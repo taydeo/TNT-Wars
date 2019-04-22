@@ -1,0 +1,42 @@
+package com.rast.tntwars;
+
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import net.md_5.bungee.api.ChatColor;
+
+/**
+ * This class creates and stores the custom items for our game.
+ * 
+ * @author Raster556
+ */
+
+public class StaticItemStackStorage {
+	
+	public static ItemStack selectorItem = GenerateSelectorItem();
+	public static ItemStack blockMenuItem = GenerateBlockMenuItem();
+	
+	
+	// Generate the selector item
+	private static ItemStack GenerateSelectorItem () {
+		ItemStack tempSelectorItem = new ItemStack(Material.GOLDEN_PICKAXE);
+		ItemMeta tempMetaData = tempSelectorItem.getItemMeta();
+		tempMetaData.setDisplayName(ChatColor.GOLD + "Region Selector");
+		tempMetaData.addEnchant(Enchantment.DURABILITY, 5, true);
+		tempSelectorItem.setItemMeta(tempMetaData);
+		return tempSelectorItem;
+	}
+	
+	// Generate the block menu item
+	private static ItemStack GenerateBlockMenuItem () {
+		ItemStack tempSelectorItem = new ItemStack(Material.CHEST);
+		ItemMeta tempMetaData = tempSelectorItem.getItemMeta();
+		tempMetaData.setDisplayName(ChatColor.GOLD + "Items");
+		tempSelectorItem.setItemMeta(tempMetaData);
+		return tempSelectorItem;
+	}
+	
+	
+}

@@ -1,0 +1,150 @@
+package com.rast.tntwars.systems;
+
+import java.util.Map;
+import java.util.Random;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
+import org.bukkit.entity.Player;
+import com.rast.tntwars.TNTWarsMain;
+
+/**
+ * This class contains methods to start the game.
+ * 
+ * @author Raster556
+ */
+
+public class GameInitializer {
+
+	private TNTWarsMain tntwars = TNTWarsMain.getInstance;
+	
+	public boolean gameStarted = false;
+	private boolean countdown = false;
+	int teamOneCount = TNTWarsMain.playerGroupManager.teamOneCount;
+	int teamTwoCount = TNTWarsMain.playerGroupManager.teamTwoCount;
+	int taskID;
+	int timeInSeconds;
+	
+	public void addPlayerToGame (Player player) {
+		
+		// Balance the way we put players in teams and do a straw pull when the teams are equally full
+		if (teamOneCount < teamTwoCount) {
+			TNTWarsMain.playerGroupManager.addToGroup(player, "teamOne");
+			teamOneJoin(player);
+		} else if (teamOneCount > teamTwoCount) {
+			TNTWarsMain.playerGroupManager.addToGroup(player, "teamTwo");
+			PlayerTeleportManager.teleportTeamTwoIsland(player, true);
+			teamTwoJoin(player);
+		} else {
+			Random rand = new Random(System.currentTimeMillis());
+			boolean strawPull = rand.nextBoolean();
+			
+			if (strawPull) {
+				TNTWarsMain.playerGroupManager.addToGroup(player, "teamOne");
+				PlayerTeleportManager.teleportTeamOneIsland(player, true);
+				teamOneJoin(player);
+			} else {
+				TNTWarsMain.playerGroupManager.addToGroup(player, "teamTwo");
+				PlayerTeleportManager.teleportTeamTwoIsland(player, true);
+				teamTwoJoin(player);
+			}
+			
+		}
+		
+	}
+	
+	private void teamOneJoin(Player player) {
+		String name = player.getName();
+		if (gameStarted) {
+			PlayerTeleportManager.teleportTeamOneIsland(player, true);
+		} else {
+			PlayerTeleportManager.teleportTeamOneWaitRoom(player, true);
+			if (checkStartGameConditions()) {
+				startGame();
+			} else {
+				Bukkit.broadcastMessage(ChatColor.DARK_RED + "Waiting for more players...");
+			}
+		}
+		Bukkit.broadcastMessage(TNTWarsMain.configEngine.teamOneColor + name + " has joined the " + TNTWarsMain.configEngine.teamOneName + " team!");
+	}
+	
+	private void teamTwoJoin (Player player) {
+		String name = player.getName();
+		if (gameStarted) {
+			PlayerTeleportManager.teleportTeamTwoIsland(player, true);
+		} else {
+			PlayerTeleportManager.teleportTeamTwoWaitRoom(player, true);
+			if (checkStartGameConditions()) {
+				startGame();
+			} else {
+				Bukkit.broadcastMessage(ChatColor.DARK_RED + "Waiting for more players...");
+			}
+		}
+		Bukkit.broadcastMessage(TNTWarsMain.configEngine.teamTwoColor + name + " has joined the " + TNTWarsMain.configEngine.teamTwoName + " team!");
+	}
+	
+	private boolean checkStartGameConditions () {
+		tntwars.getLogger().info("Checking start conditions...");
+		int minTeamSize = TNTWarsMain.configEngine.minTeamSize;
+		if (teamOneCount >= minTeamSize && teamTwoCount >= minTeamSize) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private void startGame() {
+		if (gameStarted || countdown) {
+			tntwars.getLogger().info("Failed to start game because countoun in progress or game has started.");
+		}
+		
+		countdown = true;
+		timeInSeconds = TNTWarsMain.configEngine.gameStartTimer;
+		
+		taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(tntwars, new Runnable() {
+			
+			@Override
+			public void run() {
+				if (timeInSeconds > 0) {
+					
+					Bukkit.broadcastMessage(ChatColor.AQUA + "Starting game in " + timeInSeconds + " seconds");
+					SoundPlayer.PlayGlobalSound(TNTWarsMain.configEngine.gameWorld, Sound.BLOCK_NOTE_BLOCK_BELL, SoundCategory.MASTER, Float.MAX_VALUE, 1);
+					timeInSeconds--;
+					
+				} else if (checkStartGameConditions()){
+					
+					Map<String,String> playerMap = TNTWarsMain.playerGroupManager.playerMap;
+					
+					for (Map.Entry<String,String> entry : playerMap.entrySet()) {
+						String name = entry.getKey();
+						Player player = Bukkit.getPlayer(name);
+						String group = entry.getValue();
+						
+						if (group == "teamOne") {
+							PlayerTeleportManager.teleportTeamOneIsland(player, true);
+						} else if (group == "teamTwo") {
+							PlayerTeleportManager.teleportTeamTwoIsland(player, true);
+						}
+					}
+					
+					Bukkit.broadcastMessage(ChatColor.AQUA + "Game has started!");
+					SoundPlayer.PlayGlobalSound(TNTWarsMain.configEngine.gameWorld, Sound.BLOCK_NOTE_BLOCK_BELL, SoundCategory.MASTER, Float.MAX_VALUE, 2);
+					SoundPlayer.PlayGlobalSound(TNTWarsMain.configEngine.gameWorld, Sound.BLOCK_NOTE_BLOCK_BELL, SoundCategory.MASTER, Float.MAX_VALUE, 1.5);
+					gameStarted = true;
+					Bukkit.getScheduler().cancelTask(taskID);
+					
+				} else {
+					countdown = false;
+					Bukkit.broadcastMessage(ChatColor.DARK_RED + "Not enough players to start game.");
+					Bukkit.getScheduler().cancelTask(taskID);
+				}
+				
+			}
+			
+		}, 0, 20);
+		
+	}
+	
+}

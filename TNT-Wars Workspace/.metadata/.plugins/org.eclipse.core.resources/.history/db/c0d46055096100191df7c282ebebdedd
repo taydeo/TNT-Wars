@@ -1,0 +1,81 @@
+package com.rast.tntwars.systems;
+
+import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.TNTPrimed;
+import org.bukkit.event.entity.EntityExplodeEvent;
+
+import com.rast.tntwars.TNTWarsMain;
+
+/**
+ * This class is where the custom code for tnt is held.
+ * 
+ * @author Raster556
+ */
+
+public class TNTExtentions {
+	
+	private static TNTWarsMain tntwars = TNTWarsMain.getInstance;
+	
+	// Custom code for TNT
+	public static void tntExplodeEventHandle (EntityExplodeEvent event) {
+		
+		Location location = event.getEntity().getLocation();
+		
+		// If the TNT is blowing up in the same region it was primed in we just want to start the other TNT around it.
+		if (event.getEntity().getMetadata("regOfPrimed").get(0).asString() != RegionManager.regionDetect(location)) {
+			
+			event.setCancelled(true);
+			List<Block> blocks = event.blockList();
+			
+			// Check to see if each block that was going to be blown up is TNT or not
+			for (Block block : blocks) {
+				if (block.getBlockData().getMaterial() == Material.TNT) {
+					
+					// If block was TNT we set it to air and summon a primed TNT just like vanilla Minecraft does.
+					TNTPrimed entity = (TNTPrimed) block.getWorld().spawnEntity(block.getLocation(), EntityType.PRIMED_TNT);
+					entity.setFuseTicks((int) Math.round(Math.random() * 20 + 10));
+					block.setType(Material.AIR);
+				}
+			}
+		} else {
+			// This code is for if we are in a new Region than we primed in
+			
+			// We want to disable default explosions if water destruction is enabled
+			if (TNTWarsMain.configEngine.destructableWater) {
+				event.setCancelled(true);
+				
+				// We want to make a 3x3x3 of non water to make water not prevent TNT explosions
+				location.add(-1, -1, -1);
+				for (int i = 0; i < 3; i++) {
+					for (int j = 0; j < 3; j++) {
+						for (int k = 0; k < 3; k++) {
+							Block block = location.getBlock();
+							if (block.getType() == Material.WATER) {
+								block.setType(Material.AIR);
+							}
+							location.add(1, 0, 0);
+						}
+						location.add(-3, 1, 0);
+					}
+					location.add(0, -3, 1);
+				}
+				
+				// Make new explosion at the original location a tick later to allow time for the game to register events
+				Bukkit.getScheduler().runTask(tntwars, new Runnable() {
+					@Override
+					public void run() {
+						location.add(1, 1, -2);
+						location.getWorld().createExplosion(location, 4);
+					}
+				});
+			}
+		}
+	}
+	
+}
