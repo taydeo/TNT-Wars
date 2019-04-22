@@ -79,12 +79,13 @@ public class GameEnder {
 	// Kick players and restart map after delay time
 	public void expelPlayers() {
 		gameEnded = true;
-		Bukkit.broadcastMessage(ChatColor.BLUE + "Game will restart in " + TNTWarsMain.configEngine.gameEndTimer + " seconds...");
+		Bukkit.broadcastMessage(ChatColor.AQUA + "Game will restart in " + TNTWarsMain.configEngine.gameEndTimer + " seconds...");
 		
 		// Put each player in spectator mode
 		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-			ScoreBoardManager.teamPlayerAdd(player, "Spectator");
+			TNTWarsMain.playerGroupManager.addToGroup(player, "spectator");
 			player.setGameMode(GameMode.SPECTATOR);
+			player.sendMessage(ChatColor.BLUE + "Use "+ ChatColor.UNDERLINE + "/spectate" + ChatColor.RESET + ChatColor.BLUE + " to exit this mode");
 			player.getInventory().clear();
 		}
 		

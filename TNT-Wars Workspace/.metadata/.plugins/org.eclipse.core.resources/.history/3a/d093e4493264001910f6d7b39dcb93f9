@@ -1,0 +1,57 @@
+package com.rast.tntwars.commands;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
+
+import com.rast.tntwars.TNTWarsMain;
+
+/**
+ * This class is for the /developermode command and contains the command executor and auto tab events if relevant.
+ * 
+ * @author Raster556
+ */
+
+public class SetupMode implements TabCompleter, CommandExecutor {
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String alias, String[] args) {
+	
+		// Which region do we want to save to
+		switch (args[0]) {
+		case "True":
+			if (TNTWarsMain.configEngine.developerMode) {
+				sender.sendMessage(arg0);
+			}
+			break;
+
+		case "False":
+				
+			break;
+			
+		default:
+			sender.sendMessage(ChatColor.DARK_RED + "Invaled Region Name");
+			break;
+		}
+	return true;
+	}
+	
+	// Auto Tab Event
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+		
+		// Set tab list
+		List<String> list = new ArrayList<String>(2);
+		if (args.length == 1) {
+			list.add("True");
+			list.add("False");
+		}
+		return list;
+	}
+	
+}

@@ -169,11 +169,16 @@ public class ConfigEngine {
 
 	// Compress the x y z data from the config to a 2D array
 	private int[][] compressPositions(Configuration config, String location) {
-		int[][] temp = new int[3][];
 		int [] pos1 = new int[] {config.getInt(location + ".pos1.x"), config.getInt(location + ".pos1.y"),
 				config.getInt(location + ".pos1.z") };
 		int [] pos2 = new int[] { config.getInt(location + ".pos2.x"), config.getInt(location + ".pos2.y"),
 				config.getInt(location + ".pos2.z") };
+		return positionToArrays(pos1, pos2);
+	}
+	
+	// Compress the position data to a 2D array
+	public int[][] positionToArrays(int[] pos1, int[] pos2) {
+		int[][] temp = new int[3][];
 		temp[0] = new int[] {pos1[0], pos2[0]};
 		temp[1] = new int[] {pos1[1], pos2[1]};
 		temp[2] = new int[] {pos1[2], pos2[2]};
@@ -181,6 +186,27 @@ public class ConfigEngine {
 		Arrays.sort(temp[1]);
 		Arrays.sort(temp[2]);
 		return temp;
+	}
+	
+	// Save a location to the config
+	public void saveLocation(String path, Object data) {
+		if (data instanceof int[][]) {
+			int[][] temp = (int[][]) data;
+			tntwars.reloadConfig();
+			tntwars.getConfig().set(path + ".pos1.x", temp[0][0]);
+			tntwars.getConfig().set(path + ".pos1.y", temp[1][0]);
+			tntwars.getConfig().set(path + ".pos1.z", temp[2][0]);
+			tntwars.getConfig().set(path + ".pos2.x", temp[0][1]);
+			tntwars.getConfig().set(path + ".pos2.y", temp[1][1]);
+			tntwars.getConfig().set(path + ".pos2.z", temp[2][1]);
+			tntwars.saveConfig();
+			LoadConfigData();
+		} else {
+			tntwars.reloadConfig();
+			tntwars.getConfig().set(path, data);
+			tntwars.saveConfig();
+			LoadConfigData();
+		}
 	}
 
 }

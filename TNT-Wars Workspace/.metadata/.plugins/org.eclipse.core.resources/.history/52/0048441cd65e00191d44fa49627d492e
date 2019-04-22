@@ -1,0 +1,16 @@
+package com.rast.tntwars.systems;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+
+public class ChatColorFix {
+
+	public static void sendChat (Player player, String msg) {
+		StringBuilder text = new StringBuilder();
+		text.append('<');
+		text.append(player)
+		Bukkit.broadcastMessage(msg)
+	}
+	
+}
