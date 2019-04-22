@@ -139,11 +139,10 @@ public class GameInitializer {
 						String group = entry.getValue();
 						if (group == "teamOne") {
 							PlayerTeleportManager.teleportTeamOneIsland(player, false);
-							player.getInventory().addItem(TNTWarsMain.itemStackStorage.blockMenuItem);
 						} else if (group == "teamTwo") {
 							PlayerTeleportManager.teleportTeamTwoIsland(player, false);
-							player.getInventory().addItem(TNTWarsMain.itemStackStorage.blockMenuItem);
 						}
+						player.getInventory().addItem(TNTWarsMain.itemStackStorage.blockMenuItem);
 					}
 					
 					Bukkit.broadcastMessage(ChatColor.AQUA + "Game has started!");

@@ -17,7 +17,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockDispenseEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
@@ -121,7 +120,7 @@ public class EventListener implements Listener {
 
 	// When a dispenser dispenses something
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onBlockDispense(BlockDispenseEvent event) {		
+	public void onPlayerIeract(BlockDispenseEvent event) {
 		if (TNTWarsMain.configEngine.portalTeamGriefProtection) {
 			if (event.getItem().getType() == Material.WATER_BUCKET || event.getItem().getType() == Material.LAVA_BUCKET) {
 				Location location = event.getBlock().getLocation();
@@ -203,23 +202,6 @@ public class EventListener implements Listener {
 			TNTWarsMain.blockMenu.openInventory(player);
 			player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, SoundCategory.MASTER, Float.MAX_VALUE, 1.2f);
 		} 
-		
-		// If the selector is being used
-				if (event.hasItem() && event.hasBlock() && event.getItem().isSimilar(TNTWarsMain.itemStackStorage.selectorItem)) {
-					event.setCancelled(true);
-					Block block = event.getClickedBlock();
-					if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
-						int[] loc = TNTWarsMain.selectorManager.setPos1(block.getLocation());
-						player.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.RED + "TNT Wars" + ChatColor.DARK_RED + "] "
-								+ ChatColor.YELLOW + "Pos1 set to " + ChatColor.GOLD + "(" + loc[0] + ", " + loc[1] + ", "
-								+ loc[2] + ")");
-					} else if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-						int[] loc = TNTWarsMain.selectorManager.setPos2(block.getLocation());
-						player.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.RED + "TNT Wars" + ChatColor.DARK_RED + "] "
-								+ ChatColor.YELLOW + "Pos2 set to " + ChatColor.GOLD + "(" + loc[0] + ", " + loc[1] + ", "
-								+ loc[2] + ")");
-					}
-				} 
 		
 		// If the player is interacting in their own region or is in the lobby cancel interact event
 		if (event.hasBlock()) {

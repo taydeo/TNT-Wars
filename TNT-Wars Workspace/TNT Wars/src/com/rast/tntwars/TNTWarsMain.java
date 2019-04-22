@@ -8,19 +8,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.rast.tntwars.commands.DeveloperMode;
 import com.rast.tntwars.commands.EndGame;
 import com.rast.tntwars.commands.GetSelector;
 import com.rast.tntwars.commands.PlayGlobalSound;
-import com.rast.tntwars.commands.SetPortal;
-import com.rast.tntwars.commands.SetRegion;
-import com.rast.tntwars.commands.SetSpawn;
-import com.rast.tntwars.commands.Spectate;
 import com.rast.tntwars.systems.GameInitializer;
 import com.rast.tntwars.systems.PlayerGroupManager;
 import com.rast.tntwars.systems.PlayerTeleportManager;
 import com.rast.tntwars.systems.ScoreBoardManager;
-import com.rast.tntwars.systems.SelectorManager;
 import com.rast.tntwars.systems.BlockMenu;
 import com.rast.tntwars.systems.GameEnder;
 
@@ -42,7 +36,6 @@ public class TNTWarsMain extends JavaPlugin{
 	public static StaticItemStackStorage itemStackStorage;
 	public static BlockMenu blockMenu;
 	public static GameEnder gameEnder;
-	public static SelectorManager selectorManager;
 	
 	// Runs when the plugin is enabled
 	@Override
@@ -61,7 +54,6 @@ public class TNTWarsMain extends JavaPlugin{
 		itemStackStorage = new StaticItemStackStorage();
 		blockMenu = new BlockMenu();
 		gameEnder = new GameEnder();
-		selectorManager = new SelectorManager();
 		
 		// Register Event Listener
 		getServer().getPluginManager().registerEvents(eventListener, this);
@@ -70,11 +62,6 @@ public class TNTWarsMain extends JavaPlugin{
 		getCommand("getselector").setExecutor(new GetSelector());
 		getCommand("playglobalsound").setExecutor(new PlayGlobalSound());
 		getCommand("endgame").setExecutor(new EndGame());
-		getCommand("spectate").setExecutor(new Spectate());
-		getCommand("setspawn").setExecutor(new SetSpawn());
-		getCommand("setregion").setExecutor(new SetRegion());
-		getCommand("setportal").setExecutor(new SetPortal());
-		getCommand("developermode").setExecutor(new DeveloperMode());
 		
 		// Set players to lobby that already exist (used for /reload)
 		for (Player player : Bukkit.getOnlinePlayers()) {
@@ -94,7 +81,6 @@ public class TNTWarsMain extends JavaPlugin{
 	public void onDisable() {
 		
 		// Remove references for safety
-		selectorManager = null;
 		gameEnder = null;
 		blockMenu = null;
 		itemStackStorage = null;

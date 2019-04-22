@@ -1,0 +1,11 @@
+name: TestPlugin
+main: me.Raster556.TestPluginMain
+version: 1.0
+api-version: 1.13
+commands:
+    cookies:
+        discription: COOKIES!!!
+        usage: /cookies [amount]
+    cannon:
+        discription: Gives a cannon.
+        usage: /cannon
