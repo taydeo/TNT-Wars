@@ -1,0 +1,8 @@
+name: Broadcast
+main: me.Broadcast.Raster556.BroadcastMain
+version: 1.0
+api-version: 1.13
+commands:
+    broadcast:
+        discription: Broadcast a message to all servers.
+        usage: /<command>
