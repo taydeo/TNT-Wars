@@ -33,6 +33,8 @@ public class GameInitializer {
 	
 	// Add a player to the game
 	public void addPlayerToGame (Player player) {
+		teamOneCount = TNTWarsMain.playerGroupManager.teamOneCount;
+		teamTwoCount = TNTWarsMain.playerGroupManager.teamTwoCount;
 		int maxTeamSize = TNTWarsMain.configEngine.maxTeamSize;
 		
 		// Ensure that teams are not full
@@ -101,6 +103,8 @@ public class GameInitializer {
 	
 	// Make sure teams are filled to the minimum amount
 	private boolean checkStartGameConditions () {
+		teamOneCount = TNTWarsMain.playerGroupManager.teamOneCount;
+		teamTwoCount = TNTWarsMain.playerGroupManager.teamTwoCount;
 		tntwars.getLogger().info("Checking start conditions...");
 		int minTeamSize = TNTWarsMain.configEngine.minTeamSize;
 		if (teamOneCount >= minTeamSize && teamTwoCount >= minTeamSize) {
@@ -112,6 +116,8 @@ public class GameInitializer {
 	
 	// Attempt to start the game
 	private void startGame() {
+		teamOneCount = TNTWarsMain.playerGroupManager.teamOneCount;
+		teamTwoCount = TNTWarsMain.playerGroupManager.teamTwoCount;
 		if (gameStarted || countdown) {
 			tntwars.getLogger().info("Failed to start game because countoun in progress or game has started.");
 		}
