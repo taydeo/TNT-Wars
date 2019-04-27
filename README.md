@@ -8,5 +8,3 @@
   <br><br>
   <img src="https://github.com/Raster556/TNT-Wars/blob/master/Logo.png?raw=true">
 </p>
-
-Normal text
