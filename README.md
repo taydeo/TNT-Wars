@@ -1,11 +1,12 @@
-<p align="justify">
-
-# TNT-WarsV2
-### This is TNT-Wars for spigot MC. 1.13+ (Fully Rewritten)
-
-![GitHub Logo](https://github.com/Raster556/TNT-Wars/blob/master/Logo.png?raw=true)
-   
-## Dont forget to check out the WIKI for usefull info and instructions!
-### https://github.com/Raster556/TNT-Wars/wiki
+<h1 align="center">TNT Wars!</h>
+<h3 align="center">Developed by Raster556 for Spigot MC</h>
+<p align="center">
+  <b>Useful Links:</b><br>
+  <a href="#">Wiki</a> |
+  <a href="#">Code</a> |
+  <a href="#">Issues</a>
+  <br><br>
+  <img src="https://github.com/Raster556/TNT-Wars/blob/master/Logo.png?raw=true">
 </p>
 
+Normal text
