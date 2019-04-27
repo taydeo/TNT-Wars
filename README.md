@@ -2,7 +2,7 @@
 <h3 align="center">Developed by Raster556 for Spigot MC</h>
 <p align="center">
   <b>Useful Links:</b><br>
-  <a href="#">Wiki</a> |
+  <a href="https://github.com/Raster556/TNT-Wars/wiki">Wiki</a> |
   <a href="#">Code</a> |
   <a href="#">Issues</a>
   <br><br>
