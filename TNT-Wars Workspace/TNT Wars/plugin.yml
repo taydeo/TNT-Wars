@@ -1,6 +1,6 @@
 main: com.rast.tntwars.TNTWarsMain
 name: TNT_Wars
-version: 1.1.0
+version: 1.1.1
 description: This plugin is a TNT Wars game and tool to make your own TNT Wars maps.
 api-version: 1.13
 author: Raster556
