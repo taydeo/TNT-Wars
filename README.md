@@ -1,5 +1,5 @@
-<h1 align="center">TNT Wars!</h>
-<h3 align="center">Developed by Raster556 for Spigot MC</h>
+<h1 align="center">TNT Wars!
+<h3 align="center">Developed by Raster556 for Spigot MC
 <p align="center">
   <b>Useful Links:</b><br>
   <a href="https://github.com/Raster556/TNT-Wars/wiki">Wiki</a> |
