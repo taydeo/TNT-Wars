@@ -27,6 +27,7 @@ public class PlayerGroupManager {
 	// Used to add/replace the player in the map with a group value
 	public void addToGroup (Player player, String group) {
 		String name = player.getName();
+		String oldGroup = playerMap.get(name);
 		playerMap.put(name, group);
 		
 		// If we are adding players to the a team we increment the team's counter by one.
@@ -34,6 +35,12 @@ public class PlayerGroupManager {
 			teamOneCount++;
 		} else if (group == "teamTwo") {
 			teamTwoCount++;
+		}
+		
+		if (oldGroup == "teamOne") {
+			teamOneCount--;
+		} else if (oldGroup == "teamTwo") {
+			teamTwoCount--;
 		}
 		
 		ScoreBoardManager.teamPlayerAdd(player, group);

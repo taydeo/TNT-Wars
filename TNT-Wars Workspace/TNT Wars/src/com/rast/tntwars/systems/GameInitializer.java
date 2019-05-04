@@ -120,6 +120,7 @@ public class GameInitializer {
 		teamTwoCount = TNTWarsMain.playerGroupManager.teamTwoCount;
 		if (gameStarted || countdown) {
 			tntwars.getLogger().info("Failed to start game because countoun in progress or game has started.");
+			return;
 		}
 		
 		countdown = true;
@@ -152,7 +153,7 @@ public class GameInitializer {
 						}
 					}
 					
-					Bukkit.broadcastMessage(ChatColor.AQUA + "Game has started!");
+					TitleManager.Title(ChatColor.AQUA, ChatColor.AQUA, "Game has begun!", "");
 					SoundPlayer.PlayGlobalSound(TNTWarsMain.configEngine.gameWorld, Sound.BLOCK_NOTE_BLOCK_BELL, SoundCategory.MASTER, Float.MAX_VALUE, 2);
 					SoundPlayer.PlayGlobalSound(TNTWarsMain.configEngine.gameWorld, Sound.BLOCK_NOTE_BLOCK_BELL, SoundCategory.MASTER, Float.MAX_VALUE, 1.5f);
 					gameStarted = true;

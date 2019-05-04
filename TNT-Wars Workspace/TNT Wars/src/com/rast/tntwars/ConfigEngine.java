@@ -6,7 +6,6 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.WorldCreator;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.inventory.ItemStack;
 
@@ -68,9 +67,6 @@ public class ConfigEngine {
 	
 	public ConfigEngine() {
 		tntwars.saveDefaultConfig();
-		
-		gameWorld = tntwars.getServer().createWorld(new WorldCreator(tntwars.getConfig().getString("gameWorldName")));
-		gameWorld.setAutoSave(false);
 		
 		// Create region 2D arrays
 		lobbyRegion[0] = new int[2];

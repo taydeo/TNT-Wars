@@ -51,16 +51,16 @@ public class GameEnder {
 		
 		// If for some reason there is a tie we end the game in a tie.
 		if (team1PortalTotal == 0 && team2PortalTotal == 0) {
-			Bukkit.broadcastMessage(ChatColor.YELLOW + "The Game is a Tie!");
+			TitleManager.Title(ChatColor.YELLOW, ChatColor.DARK_GRAY, "Game is a tie!", "nobody won the game");
 			SoundPlayer.PlayGlobalSound(world, Sound.ENTITY_WITHER_HURT, SoundCategory.AMBIENT, Float.MAX_VALUE, 0.9f);
 			expelPlayers();
 		} else if (team2PortalTotal == 0) {
-			Bukkit.broadcastMessage(TNTWarsMain.configEngine.teamOneColor + TNTWarsMain.configEngine.teamOneName + ChatColor.GREEN + " team won the game!");
+			TitleManager.Title(TNTWarsMain.configEngine.teamOneColor, ChatColor.DARK_GRAY, TNTWarsMain.configEngine.teamOneName + " has won the game!", "");
 			SoundPlayer.PlayGlobalSound(world, Sound.ENTITY_WITHER_DEATH, SoundCategory.AMBIENT, Float.MAX_VALUE, 1);
 			expelPlayers();
 			
 		} else if (team1PortalTotal == 0) {
-			Bukkit.broadcastMessage(TNTWarsMain.configEngine.teamTwoColor + TNTWarsMain.configEngine.teamTwoName + ChatColor.GREEN + " team won the game!");
+			TitleManager.Title(TNTWarsMain.configEngine.teamTwoColor, ChatColor.DARK_GRAY, TNTWarsMain.configEngine.teamTwoName + " has won the game!", "");
 			SoundPlayer.PlayGlobalSound(world, Sound.ENTITY_WITHER_DEATH, SoundCategory.AMBIENT, Float.MAX_VALUE, 1);
 			expelPlayers();
 		}
@@ -103,11 +103,21 @@ public class GameEnder {
 					
 					@Override
 					public void run() {
-						unloadMap("map");
+						unloadMap(TNTWarsMain.configEngine.gameWorld.getName());
 						Bukkit.getServer().spigot().restart();
 					}
 				});
 			}
 		}, TNTWarsMain.configEngine.gameEndTimer*20);
+	}
+	
+	// Kick players and restart map instantly (when the world does a stop or a reset for some odd reason)
+	public void expelPlayersInstant() {
+
+		// Kick the players from the world so the world can unload without any issue
+		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+			player.kickPlayer("The game is restarting...");
+		}
+		unloadMap(TNTWarsMain.configEngine.gameWorld.getName());
 	}
 }

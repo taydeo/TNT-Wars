@@ -1,9 +1,9 @@
 package com.rast.tntwars;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.rast.tntwars.commands.DeveloperMode;
 import com.rast.tntwars.commands.EndGame;
 import com.rast.tntwars.commands.GetSelector;
+import com.rast.tntwars.commands.Leave;
 import com.rast.tntwars.commands.PlayGlobalSound;
 import com.rast.tntwars.commands.SetPortal;
 import com.rast.tntwars.commands.SetRegion;
@@ -49,7 +50,10 @@ public class TNTWarsMain extends JavaPlugin{
 	public void onEnable() {
 		getInstance = this;
 		
-		getServer().createWorld(new WorldCreator("map"));
+		// Start the map world if it does not already exist and set auto-save to false
+		World gameWorld = getServer().createWorld(new WorldCreator(getConfig().getString("gameWorldName")));
+		gameWorld.setAutoSave(false);
+		
 		// Setup config
 		configEngine = new ConfigEngine();
 		
@@ -75,7 +79,8 @@ public class TNTWarsMain extends JavaPlugin{
 		getCommand("setregion").setExecutor(new SetRegion());
 		getCommand("setportal").setExecutor(new SetPortal());
 		getCommand("developermode").setExecutor(new DeveloperMode());
-		
+		getCommand("leave").setExecutor(new Leave());
+
 		// Set players to lobby that already exist (used for /reload)
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 0, true, false, false));
@@ -83,15 +88,14 @@ public class TNTWarsMain extends JavaPlugin{
 			TNTWarsMain.playerGroupManager.addToGroup(player, "lobby");
 		}
 		
-		// Grab a temporary item menu to load it in memory
-		@SuppressWarnings("unused")
-		ItemStack tempBlockMenu = itemStackStorage.blockMenuItem;
 		
 	}
 	
 	// Runs when the plugin shuts down
 	@Override
 	public void onDisable() {
+		// Unload the map without saving
+		gameEnder.expelPlayersInstant();
 		
 		// Remove references for safety
 		selectorManager = null;
