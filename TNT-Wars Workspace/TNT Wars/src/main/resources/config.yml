@@ -1,0 +1,235 @@
+#---------------------------------------
+# This config is for changing many game
+# settings for the map and game rules
+# --------------------------------------
+
+
+#team colors (chat color names all caps)
+lobbyColor: GRAY
+spectatorColor: BLUE
+teamOneColor: DARK_AQUA
+teamTwoColor: GOLD
+
+#game settings
+gameStartTimer: 30
+gameEndTimer: 10
+gameSpawnClearRadius: 2
+minTeamSize: 1
+maxTeamSize: 6
+destructibleWater: true
+tntTeamGriefProtection: true
+portalTeamGriefProtection: true
+pistonBounding: true
+teamOneName: Cyan
+teamTwoName: Orange
+gameWorldName: map
+
+#developer mode
+developerMode: false
+
+#lobby region
+lobby:
+  pos1:
+    x: 23
+    y: 71
+    z: -78
+  pos2:
+    x: -26
+    y: 110
+    z: -139
+#lobby portal region
+lobbyPortal:
+  pos1:
+    x: -2
+    y: 88
+    z: -126
+  pos2:
+    x: 2
+    y: 82
+    z: -126
+#lobby spawn point
+lobbySpawn:
+  ==: org.bukkit.Location
+  world: map
+  x: 0.5
+  y: 84.0
+  z: -111.5
+  pitch: 0.0
+  yaw: 180.0
+#team one wait room spawn point
+teamOneWaitRoom:
+  ==: org.bukkit.Location
+  world: map
+  x: -9.0
+  y: 84.0
+  z: -88.5
+  pitch: 0
+  yaw: 0
+#team two wait room spawn point
+teamTwoWaitRoom:
+  ==: org.bukkit.Location
+  world: map
+  x: 10.0
+  y: 84.0
+  z: -88.5
+  pitch: 0
+  yaw: 0
+#team one island region
+teamOneIsland:
+  pos1:
+    x: -10
+    y: 76
+    z: -32
+  pos2:
+    x: -45
+    y: 107
+    z: 32
+#team two island region
+teamTwoIsland:
+  pos1:
+    x: 10
+    y: 76
+    z: 32
+  pos2:
+    x: 45
+    y: 107
+    z: -32
+#team one spawn point
+teamOneSpawn:
+  ==: org.bukkit.Location
+  world: map
+  x: -38.5
+  y: 98.0
+  z: 0.5
+  pitch: 0.0
+  yaw: 270.0
+#team two spawn point
+teamTwoSpawn:
+  ==: org.bukkit.Location
+  world: map
+  x: 39.5
+  y: 98.0
+  z: 0.5
+  pitch: 0.0
+  yaw: 90.0
+  
+#number of portals per team (max of 9)
+teamPortals: 3
+
+#list of portal regions
+teamOnePortalOne:
+  pos1:
+    x: -35
+    y: 90
+    z: 21
+  pos2:
+    x: -35
+    y: 86
+    z: 17
+    
+teamOnePortalTwo:
+  pos1:
+    x: -35
+    y: 95
+    z: 2
+  pos2:
+    x: -35
+    y: 91
+    z: -2
+    
+teamOnePortalThree:
+  pos1:
+    x: -35
+    y: 90
+    z: -17
+  pos2:
+    x: -35
+    y: 86
+    z: -21
+    
+teamTwoPortalOne:
+  pos1:
+    x: 35
+    y: 90
+    z: -21
+  pos2:
+    x: 35
+    y: 86
+    z: -17
+    
+teamTwoPortalTwo:
+  pos1:
+    x: 35
+    y: 95
+    z: -2
+  pos2:
+    x: 35
+    y: 91
+    z: 2
+    
+teamTwoPortalThree:
+  pos1:
+    x: 35
+    y: 90
+    z: 17
+  pos2:
+    x: 35
+    y: 86
+    z: 21
+
+# Game items
+gameItems:
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: TNT
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: WATER_BUCKET
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: BUCKET
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: STONE_BRICKS
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: REDSTONE
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: REDSTONE_BLOCK
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: REPEATER
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: COMPARATOR
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: REDSTONE_TORCH
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: PISTON
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: STICKY_PISTON
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: SLIME_BLOCK
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: DISPENSER
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: OBSERVER
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: STONE_BUTTON
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: LEVER
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: STONE_BRICK_SLAB
+- ==: org.bukkit.inventory.ItemStack
+  v: 1631
+  type: IRON_PICKAXE

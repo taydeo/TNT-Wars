@@ -1,0 +1,67 @@
+main: com.rast.tntwars.TNTWarsMain
+name: ${project.name}
+version: ${project.version}
+description: ${project.description}
+api-version: 1.13
+author: Raster556
+commands:
+    getselector:
+        description: Gives user the selector tool.
+        usage: "Usage: /<command>"
+        permission: tntwars.admin.edit
+        permission-message: You not have have permission to use this command.
+    playglobalsound:
+        description: Manualy plays game global sound.
+        usage: "Usage: /<command> [SoundName]"
+        permission: tntwars.admin.manualoveride
+        permission-message: You not have have permission to use this command.
+    endgame:
+        description: Manualy ends the game.
+        usage: "Usage: /<command>"
+        permission: tntwars.admin.manualoveride
+        permission-message: You not have have permission to use this command.
+    setspawn:
+        description: Sets a spawn point at your position
+        usage: "Usage: /<command> [Location]"
+        permission: tntwars.admin.edit
+        permission-message: You not have have permission to use this command.
+    setregion:
+        description: Sets a region from the selection
+        usage: "Usage: /<command> [Region]"
+        permission: tntwars.admin.edit
+        permission-message: You not have have permission to use this command.
+    setportal:
+        description: Sets the portal region from the selection
+        usage: "Usage: /<command> [Portal]"
+        permission: tntwars.admin.edit
+        permission-message: You not have have permission to use this command.
+    setportalcount:
+        description: Sets the amount of portals each team has
+        usage: "Usage: /<command> [PortalCount]"
+        permission: tntwars.admin.edit
+        permission-message: You not have have permission to use this command.
+    developermode:
+        description: Toggles developer mode
+        usage: "Usage: /<command>"
+        permission: tntwars.admin.edit
+        permission-message: You not have have permission to use this command.
+    spectate:
+        description: Toggles spectator mode
+        usage: "Usage: /<command>"
+        permission: tntwars.game
+        permission-message: You not have have permission to use this command.
+    leave:
+        description: Leave the game
+        usage: "Usage: /<command>"
+        permission: tntwars.game
+        permission-message: You not have have permission to use this command.
+permissions:
+    tntwars.admin.edit:
+        description: Allows use of the editor commands.
+        default: op
+    tntwars.admin.manualoveride:
+        description: Allows use of the manual overide commands.
+        default: op
+    tntwars.game:
+        description: Commands for normal players.
+        default: true
